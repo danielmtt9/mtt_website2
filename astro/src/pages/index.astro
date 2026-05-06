@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
+import BentoGrid from '../components/BentoGrid.astro';
+import CardHero from '../components/CardHero.astro';
+import CardTechStack from '../components/CardTechStack.astro';
+import CardThreeThreads from '../components/CardThreeThreads.astro';
+import CardInvoice from '../components/CardInvoice.astro';
+import CardVenture from '../components/CardVenture.astro';
+import OntarioEdge from '../components/OntarioEdge.astro';
+---
+
+<Layout title="Maple Tyne Technologies | Tech Venture Studio">
+	<main>
+		<Logo />
+		
+		<BentoGrid>
+			<CardHero />
+			<CardTechStack />
+			<CardThreeThreads />
+			<CardInvoice />
+			<CardVenture />
+		</BentoGrid>
+		
+		<OntarioEdge />
+		
+		<footer>
+			<div class="footer-content">
+				<p>&copy; 2026 Maple-Tyne Technologies Inc. | Engineering the Automated Future.</p>
+				<div class="footer-links">
+					<span class="location">Toronto, Ontario</span>
+				</div>
+			</div>
+		</footer>
+	</main>
+</Layout>
+
+<style>
+	main {
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem 0;
+	}
+	
+	footer {
+		margin-top: 5rem;
+		border-top: 1px solid var(--color-border);
+		padding: 2rem 0;
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		opacity: 0.6;
+	}
+	
+	.footer-content {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	@media (max-width: 768px) {
+		.footer-content {
+			flex-direction: column;
+			gap: 1rem;
+			text-align: center;
+		}
+	}
+</style>

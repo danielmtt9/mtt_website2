@@ -1,0 +1,14 @@
+# Astro
+astro/node_modules/
+astro/dist/
+astro/.astro/
+
+# Agent stuff
+.agent/
+.agents/
+.claude/
+_bmad/
+_bmad-output/
+
+# OS files
+.DS_Store

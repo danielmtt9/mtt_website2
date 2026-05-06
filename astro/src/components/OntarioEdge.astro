@@ -1,0 +1,85 @@
+---
+---
+<section class="ontario-edge">
+  <div class="tactile-card accent-green">
+    <h2 class="section-title">The Ontario Edge</h2>
+    <div class="math-grid">
+      <div class="math-item">
+        <span class="label">ULO Charge Rate (11PM - 7AM)</span>
+        <span class="value">3.9¢/kWh</span>
+      </div>
+      <div class="math-item">
+        <span class="label">Peak Discharge Rate (4PM - 9PM)</span>
+        <span class="value">39.1¢/kWh</span>
+      </div>
+      <div class="math-divider"></div>
+      <div class="math-item profit">
+        <span class="label">Automated Spread Profit</span>
+        <span class="value">35.2¢/kWh</span>
+      </div>
+    </div>
+    <p class="summary-text">
+      Our AI agent automates this spread, potentially saving homeowners <strong>$1,500/year</strong> automatically.
+    </p>
+  </div>
+</section>
+
+<style>
+  .ontario-edge {
+    margin-top: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--color-power-green);
+  }
+  
+  .math-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px dashed #444;
+  }
+  
+  .math-item {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+  }
+  
+  .label {
+    opacity: 0.7;
+  }
+  
+  .value {
+    color: var(--color-text);
+    font-weight: bold;
+  }
+  
+  .math-divider {
+    height: 1px;
+    background: #444;
+    margin: 0.5rem 0;
+  }
+  
+  .profit .value {
+    color: var(--color-power-green);
+    font-size: 1.2rem;
+  }
+  
+  .summary-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  .summary-text strong {
+    color: var(--color-power-green);
+    text-decoration: underline;
+  }
+</style>

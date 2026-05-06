@@ -1,0 +1,59 @@
+---
+---
+<div class="logo-container">
+  <img src="/logo/logo.png" alt="Maple Tyne Technologies Logo" class="main-logo" />
+  <div class="company-name">
+    <h1>Maple-Tyne Technologies Inc.</h1>
+    <p class="tagline">Sustainability. Innovation. Management.</p>
+  </div>
+</div>
+
+<style>
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+  
+  .main-logo {
+    height: 80px;
+    width: auto;
+    filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.2));
+  }
+  
+  .company-name h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+  
+  .tagline {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+    color: var(--color-electric-blue);
+  }
+  
+  @media (max-width: 768px) {
+    .logo-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+    
+    .main-logo {
+      height: 60px;
+    }
+    
+    .company-name h1 {
+      font-size: 1.4rem;
+    }
+  }
+</style>

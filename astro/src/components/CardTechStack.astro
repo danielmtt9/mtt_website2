@@ -1,0 +1,39 @@
+---
+---
+<div class="tactile-card tech-card" style="grid-column: span 4;">
+  <div class="tag">Engineering Depth</div>
+  <h3 class="card-title">Modern Stack</h3>
+  <ul class="tech-list">
+    <li>openHAB</li>
+    <li>MCP (Model Context Protocol)</li>
+    <li>n8n</li>
+    <li>Astro 5.0</li>
+    <li>TypeScript</li>
+  </ul>
+</div>
+
+<style>
+  .tech-list {
+    list-style: none;
+    margin-top: 1rem;
+  }
+  
+  .tech-list li {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--color-electric-blue);
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #333;
+  }
+  
+  .tech-list li::before {
+    content: "> ";
+    opacity: 0.5;
+  }
+  
+  @media (max-width: 768px) {
+    .tech-card {
+      grid-column: span 1 !important;
+    }
+  }
+</style>

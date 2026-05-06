@@ -1,0 +1,37 @@
+---
+---
+<div class="tactile-card utility-card accent-green" style="grid-column: span 4;">
+  <div class="tag green">Utilities</div>
+  <h3 class="card-title">Invoice Generator</h3>
+  <p class="card-text">
+    Micro-SaaS for high-speed billing and workflow automation. Simplified financial engineering.
+  </p>
+  <div class="card-status">
+    <span class="status-dot"></span> Active
+  </div>
+</div>
+
+<style>
+  .card-status {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-power-green);
+  }
+  
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-power-green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-power-green);
+  }
+  
+  @media (max-width: 768px) {
+    .utility-card {
+      grid-column: span 1 !important;
+    }
+  }
+</style>
