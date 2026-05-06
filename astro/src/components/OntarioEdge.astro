@@ -1,7 +1,8 @@
 ---
 ---
 <section class="ontario-edge">
-  <div class="tactile-card accent-green">
+  <div class="tactile-card">
+    <div class="tag">Regional Advantage</div>
     <h2 class="section-title">The Ontario Edge</h2>
     <div class="math-grid">
       <div class="math-item">
@@ -19,7 +20,7 @@
       </div>
     </div>
     <p class="summary-text">
-      Our AI agent automates this spread, potentially saving homeowners <strong>$1,500/year</strong> automatically.
+      Our AI agent automates this spread, potentially saving homeowners <span class="profit-highlight">$1,500/year</span> automatically.
     </p>
   </div>
 </section>
@@ -30,27 +31,30 @@
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 2rem;
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 2rem;
-    color: var(--color-power-green);
+    font-family: var(--font-serif);
   }
   
   .math-grid {
     display: grid;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px dashed #444;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
   }
   
   .math-item {
     display: flex;
     justify-content: space-between;
     font-family: var(--font-mono);
+    font-size: 1.1rem;
   }
   
   .label {
@@ -59,27 +63,35 @@
   
   .value {
     color: var(--color-text);
-    font-weight: bold;
+    font-weight: 600;
   }
   
   .math-divider {
     height: 1px;
-    background: #444;
+    background: var(--color-border);
     margin: 0.5rem 0;
   }
   
+  .profit .label {
+    color: var(--color-accent);
+    font-weight: bold;
+  }
+
   .profit .value {
-    color: var(--color-power-green);
-    font-size: 1.2rem;
+    color: var(--color-accent);
+    font-size: 1.5rem;
   }
   
   .summary-text {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 1.6;
+    max-width: 800px;
   }
   
-  .summary-text strong {
-    color: var(--color-power-green);
-    text-decoration: underline;
+  @media (max-width: 768px) {
+    .section-title { font-size: 1.8rem; }
+    .math-item { font-size: 0.9rem; flex-direction: column; gap: 0.25rem; }
+    .profit .value { font-size: 1.2rem; }
+    .ontario-edge { padding: 0 1.5rem; }
   }
 </style>

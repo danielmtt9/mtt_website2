@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 interface Props {
 	title: string;
@@ -18,8 +20,31 @@ const { title, description = "Maple Tyne Technologies - Tech Venture Studio & En
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+    
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    </script>
 	</head>
 	<body>
+    <header>
+      <div class="nav-container">
+        <Logo size="small" />
+        <ThemeToggle />
+      </div>
+    </header>
 		<slot />
 	</body>
 </html>

@@ -1,93 +1,106 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=JetBrains+Mono:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=JetBrains+Mono:wght@400..800&family=Outfit:wght@100..900&display=swap');
 
 :root {
-  --color-bg: #121212;
-  --color-text: #E0E0E0;
-  --color-electric-blue: #00E5FF;
-  --color-power-green: #39FF14;
-  --color-border: #333333;
-  --color-card-bg: #1A1A1A;
+  /* Logo Colors */
+  --logo-green: #4CAF50;
+  --logo-blue: #B3E5FC;
+  --logo-black: #121212;
   
-  --font-serif: 'Fraunces', serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  
-  --border-radius: 0px;
-  --border-width: 1px;
+  /* Light Theme (Default-ish, but usually we start dark for premium tech) */
+  --color-bg: #FFFFFF;
+  --color-text: #121212;
+  --color-card-bg: #F8F9FA;
+  --color-border: #E0E0E0;
+  --color-accent: var(--logo-green);
+  --color-secondary: #0288D1;
+  --header-bg: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="dark"] {
+  --color-bg: #0A0A0A;
+  --color-text: #F5F5F5;
+  --color-card-bg: #141414;
+  --color-border: #262626;
+  --color-accent: #66BB6A;
+  --color-secondary: #29B6F6;
+  --header-bg: rgba(10, 10, 10, 0.8);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 body {
-  font-family: var(--font-mono);
+  font-family: 'Outfit', sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
-  padding: 2rem;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: #FFFFFF;
+  color: var(--color-text);
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--header-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 2rem;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .tactile-card {
   background-color: var(--color-card-bg);
-  border: var(--border-width) solid var(--color-border);
-  padding: 2rem;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  border: 1px solid var(--color-border);
+  padding: 2.5rem;
+  border-radius: 12px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .tactile-card:hover {
-  transform: translate(-4px, -4px);
-  border-color: var(--color-electric-blue);
-  box-shadow: 4px 4px 0px 0px var(--color-electric-blue);
-}
-
-.tactile-card.accent-green:hover {
-  border-color: var(--color-power-green);
-  box-shadow: 4px 4px 0px 0px var(--color-power-green);
-}
-
-.card-title {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.card-text {
-  font-size: 0.9rem;
-  opacity: 0.8;
+  transform: translateY(-8px);
+  border-color: var(--color-accent);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .tag {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--color-electric-blue);
-  color: var(--color-electric-blue);
+  padding: 0.35rem 1rem;
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--color-accent);
+  border-radius: 100px;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
-.tag.green {
-  border-color: var(--color-power-green);
-  color: var(--color-power-green);
+  margin-bottom: 1.5rem;
 }
 
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 4rem auto;
+  padding: 0 2rem;
 }
 
 @media (max-width: 1024px) {
@@ -99,5 +112,19 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
   .bento-grid {
     grid-template-columns: 1fr;
+    padding: 0 1.5rem;
   }
+}
+
+/* Premium Gradients */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.profit-highlight {
+  color: var(--color-accent);
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(102, 187, 106, 0.3);
 }

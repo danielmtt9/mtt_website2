@@ -1,59 +1,64 @@
 ---
+interface Props {
+  size?: 'small' | 'large';
+  showText?: boolean;
+}
+
+const { size = 'large', showText = true } = Astro.props;
 ---
-<div class="logo-container">
+<div class={`logo-container ${size}`}>
   <img src="/logo/logo.png" alt="Maple Tyne Technologies Logo" class="main-logo" />
-  <div class="company-name">
-    <h1>Maple-Tyne Technologies Inc.</h1>
-    <p class="tagline">Sustainability. Innovation. Management.</p>
-  </div>
+  {showText && (
+    <div class="company-name">
+      <h1 class={size === 'small' ? 'text-sm' : ''}>Maple-Tyne Technologies Inc.</h1>
+      {size === 'large' && <p class="tagline">Sustainability. Innovation. Management.</p>}
+    </div>
+  )}
 </div>
 
 <style>
   .logo-container {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 1rem;
+    gap: 1.25rem;
   }
+  
+  .logo-container.small { gap: 0.75rem; }
   
   .main-logo {
-    height: 80px;
+    height: 60px;
     width: auto;
-    filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.2));
+    filter: drop-shadow(0 0 15px rgba(76, 175, 80, 0.15));
   }
   
+  .small .main-logo { height: 40px; }
+  
   .company-name h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-bottom: 0;
     line-height: 1;
+    font-family: 'Outfit', sans-serif;
   }
+  
+  .company-name h1.text-sm { font-size: 1.1rem; }
   
   .tagline {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.2rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15rem;
     text-transform: uppercase;
     opacity: 0.6;
-    color: var(--color-electric-blue);
+    color: var(--color-accent);
+    margin-top: 0.25rem;
   }
   
   @media (max-width: 768px) {
-    .logo-container {
-      flex-direction: column;
-      text-align: center;
-      gap: 1rem;
+    .logo-container:not(.small) {
+      flex-direction: row;
+      text-align: left;
     }
     
-    .main-logo {
-      height: 60px;
-    }
-    
-    .company-name h1 {
-      font-size: 1.4rem;
-    }
+    .main-logo { height: 50px; }
+    .company-name h1 { font-size: 1.2rem; }
   }
 </style>
