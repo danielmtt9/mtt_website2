@@ -1,0 +1,403 @@
+---
+---
+<div class="tilt-card-container webhook-wrapper">
+  <div class="tactile-card webhook-card tilt-card-inner" id="webhook-card">
+    <div class="card-header">
+      <div class="tag">Dev Console</div>
+      <div class="status-badge amber" id="webhook-status-badge">
+        <span class="dot"></span>
+        <span id="webhook-status-text">CONFIG REQUIRED</span>
+      </div>
+    </div>
+    
+    <h3 class="card-title">Webhook API Console</h3>
+    <p class="card-desc">Configure and test the system webhook for the AI Diagram Generator and Chat History API.</p>
+    
+    <div class="console-layout">
+      <!-- Input Override Form -->
+      <div class="input-section">
+        <label for="webhook-url-input" class="console-label">API_ENDPOINT_URL</label>
+        <div class="input-row">
+          <input 
+            type="url" 
+            id="webhook-url-input" 
+            placeholder="http://localhost:30000/api/chat-history"
+            class="terminal-input"
+            aria-label="Webhook API URL"
+          />
+          <button id="webhook-test-btn" class="console-btn">[RUN_TEST]</button>
+        </div>
+      </div>
+      
+      <!-- Monospaced Console Log Viewport -->
+      <div class="console-log-box">
+        <div class="console-log-header">
+          <span>DIAGNOSTIC_FEED</span>
+          <span class="console-action-text" id="clear-console-btn">CLEAR_FEED</span>
+        </div>
+        <div class="console-log-body" id="console-output">
+          <div class="log-line text-blue">> INITIALIZING DEV_CONSOLE...</div>
+          <div class="log-line">> AUTO_DETECTING SERVER ENDPOINT...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .webhook-wrapper {
+    grid-column: span 4;
+  }
+
+  .webhook-card {
+    background: linear-gradient(135deg, var(--color-card-bg) 0%, rgba(41, 182, 246, 0.02) 100%);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .card-header .tag {
+    margin-bottom: 0;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-family: var(--font-serif);
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .console-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  .input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .console-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    opacity: 0.6;
+    letter-spacing: 0.05rem;
+  }
+
+  .input-row {
+    display: flex;
+    gap: 0.75rem;
+    height: 48px;
+    align-items: center;
+  }
+
+  .terminal-input {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0 1rem;
+    height: 100%;
+    border-radius: 4px;
+  }
+
+  .terminal-input:focus {
+    border-color: var(--color-secondary);
+    background-color: rgba(0, 0, 0, 0.5);
+    outline: none;
+  }
+
+  .console-btn {
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0 1.25rem;
+    height: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .console-btn:hover:not(:disabled) {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+  }
+
+  .console-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Console Output Block */
+  .console-log-box {
+    background-color: #050505;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+  }
+
+  .console-log-header {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.4rem 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.65rem;
+  }
+
+  .console-action-text {
+    cursor: pointer;
+  }
+
+  .console-action-text:hover {
+    color: var(--color-text);
+  }
+
+  .console-log-body {
+    padding: 0.75rem;
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .log-line {
+    color: rgba(255, 255, 255, 0.75);
+    word-break: break-all;
+  }
+
+  .log-line.text-blue {
+    color: var(--color-secondary);
+  }
+
+  .log-line.text-green {
+    color: var(--color-accent);
+  }
+
+  .log-line.text-amber {
+    color: var(--color-amber);
+  }
+
+  .log-line.text-red {
+    color: var(--color-red);
+  }
+
+  @media (max-width: 1023px) {
+    .webhook-wrapper {
+      grid-column: span 6;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .webhook-wrapper {
+      grid-column: span 1 !important;
+    }
+    
+    .webhook-card {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  const initWebhookConsole = () => {
+    const card = document.getElementById('webhook-card');
+    const urlInput = document.getElementById('webhook-url-input') as HTMLInputElement;
+    const testBtn = document.getElementById('webhook-test-btn') as HTMLButtonElement;
+    const consoleOutput = document.getElementById('console-output');
+    const clearBtn = document.getElementById('clear-console-btn');
+    const badge = document.getElementById('webhook-status-badge');
+    const badgeText = document.getElementById('webhook-status-text');
+
+    if (!card || !urlInput || !testBtn || !consoleOutput || !clearBtn || !badge || !badgeText) return;
+
+    // Desktop 3D tilt tracking (matches CardHero & CardSolarROI)
+    const isDesktop = window.matchMedia('(min-width: 1024px)');
+    
+    const handleMove = (e: MouseEvent) => {
+      if (!isDesktop.matches) return;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const normalizedX = (x / rect.width) * 2 - 1;
+      const normalizedY = (y / rect.height) * 2 - 1;
+      card.style.transform = `rotateX(${normalizedY * -6}deg) rotateY(${normalizedX * 6}deg) translateY(-4px)`;
+    };
+
+    const handleLeave = () => {
+      card.style.transform = 'none';
+    };
+
+    card.addEventListener('mousemove', handleMove);
+    card.addEventListener('mouseleave', handleLeave);
+
+    // Logging helpers
+    const log = (msg: string, type: 'info' | 'success' | 'warn' | 'error' | 'default' = 'default') => {
+      const line = document.createElement('div');
+      line.className = 'log-line';
+      if (type === 'info') line.classList.add('text-blue');
+      if (type === 'success') line.classList.add('text-green');
+      if (type === 'warn') line.classList.add('text-amber');
+      if (type === 'error') line.classList.add('text-red');
+      
+      const time = new Date().toLocaleTimeString(undefined, { hour12: false });
+      line.textContent = `[${time}] ${msg}`;
+      consoleOutput.appendChild(line);
+      consoleOutput.scrollTop = consoleOutput.scrollHeight;
+    };
+
+    // Auto-detection logic
+    const detectEndpoint = () => {
+      // Load saved URL first
+      const saved = localStorage.getItem('mtt_chat_history_url');
+      if (saved) {
+        urlInput.value = saved;
+        log(`LOADED SAVED ENDPOINT: ${saved}`, 'success');
+        verifyEndpoint(saved, true); // Silent auto-check on load
+        return;
+      }
+
+      // Dynamic auto-detect based on host origin
+      const dynamicOrigin = window.location.origin;
+      let detected = '';
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        detected = 'http://localhost:30000/api/chat-history';
+      } else {
+        detected = `${dynamicOrigin}/api/chat-history`;
+      }
+      urlInput.value = detected;
+      log(`AUTO-DETECTED DEFAULT: ${detected}`, 'info');
+      verifyEndpoint(detected, true); // Silent auto-check on load
+    };
+
+    // Verify endpoint
+    const verifyEndpoint = async (url: string, silent = false) => {
+      if (!silent) {
+        log(`TESTING CONNECTION TO: ${url}...`, 'default');
+      }
+
+      // Check if URL is blank
+      if (!url.trim()) {
+        badge.className = 'status-badge red';
+        badgeText.textContent = 'ERROR';
+        log('ERR_URL_BLANK: ENDPOINT URL CANNOT BE EMPTY', 'error');
+        return;
+      }
+
+      let isVerifying = false;
+      let spinnerInterval: any = null;
+      let animFrame = 0;
+      const loaderChars = ['\\', '|', '/', '-'];
+
+      if (!silent) {
+        isVerifying = true;
+        testBtn.disabled = true;
+        urlInput.disabled = true;
+        spinnerInterval = setInterval(() => {
+          testBtn.textContent = `[TESTING ${loaderChars[animFrame % 4]}]`;
+          animFrame++;
+        }, 120);
+      }
+
+      try {
+        // Attempt a network fetch to verify connection
+        // We use an actual fetch, but set a short timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+        const response = await fetch(url, {
+          method: 'GET',
+          signal: controller.signal,
+          mode: 'cors',
+          headers: { 'Accept': 'application/json' }
+        }).catch(err => {
+          // If it fails with CORS or other errors but is responding, we might catch it below
+          throw err;
+        });
+
+        clearTimeout(timeoutId);
+
+        if (response.ok || response.status < 500) {
+          // Connected! (even a 401/403/404 means the server exists and answered)
+          badge.className = 'status-badge active';
+          badgeText.textContent = 'CONNECTED';
+          if (!silent) {
+            log(`HTTP_${response.status}: SERVER RESPONDED SUCCESS`, 'success');
+          }
+          localStorage.setItem('mtt_chat_history_url', url);
+        } else {
+          throw new Error(`Server returned HTTP ${response.status}`);
+        }
+      } catch (err: any) {
+        // Network or CORS errors. In local development or mixed SSL setups, cors blocks might occur.
+        // We will fall back to amber CONFIG REQUIRED or error state.
+        badge.className = 'status-badge amber';
+        badgeText.textContent = 'CONFIG REQUIRED';
+        
+        if (!silent) {
+          if (err.name === 'AbortError') {
+            log('ERR_TIMEOUT: WEBHOOK ENDPOINT DID NOT RESPOND IN TIME', 'error');
+          } else {
+            log(`ERR_CONN_FAILED: COULD NOT CONNECT TO ENDPOINT`, 'error');
+            log(`REASON: ${err.message || 'CORS restriction or Offline server'}`, 'warn');
+          }
+        }
+      } finally {
+        if (!silent) {
+          clearInterval(spinnerInterval);
+          testBtn.disabled = false;
+          urlInput.disabled = false;
+          testBtn.textContent = '[RUN_TEST]';
+        }
+      }
+    };
+
+    // Event listeners
+    testBtn.addEventListener('click', () => {
+      verifyEndpoint(urlInput.value);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      consoleOutput.innerHTML = '';
+      log('CONSOLE CLEARED', 'info');
+    });
+
+    // Detect endpoint on load
+    detectEndpoint();
+  };
+
+  document.addEventListener('DOMContentLoaded', initWebhookConsole);
+</script>

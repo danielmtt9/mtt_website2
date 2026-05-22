@@ -4,7 +4,8 @@ import Logo from '../components/Logo.astro';
 import BentoGrid from '../components/BentoGrid.astro';
 import CardHero from '../components/CardHero.astro';
 import CardTechStack from '../components/CardTechStack.astro';
-import CardThreeThreads from '../components/CardThreeThreads.astro';
+import CardSolarROI from '../components/CardSolarROI.astro';
+import CardWebhookConsole from '../components/CardWebhookConsole.astro';
 import CardInvoice from '../components/CardInvoice.astro';
 import CardVenture from '../components/CardVenture.astro';
 import OntarioEdge from '../components/OntarioEdge.astro';
@@ -20,7 +21,8 @@ import OntarioEdge from '../components/OntarioEdge.astro';
 		<BentoGrid>
 			<CardHero />
 			<CardTechStack />
-			<CardThreeThreads />
+			<CardSolarROI />
+			<CardWebhookConsole />
 			<CardInvoice />
 			<CardVenture />
 		</BentoGrid>
@@ -34,7 +36,13 @@ import OntarioEdge from '../components/OntarioEdge.astro';
           <p class="footer-desc">Building automated infrastructure for energy, apparel, and financial services.</p>
         </div>
 				<div class="footer-details">
-					<span class="location">Toronto, Ontario</span>
+					<div class="footer-links">
+						<a href="#privacy" class="footer-link">PRIVACY_POLICY</a>
+						<span class="separator">//</span>
+						<a href="#terms" class="footer-link">TERMS_OF_SERVICE</a>
+						<span class="separator">//</span>
+						<a href="#status" class="footer-link">SYSTEM_STATUS</a>
+					</div>
           <p class="copyright">&copy; 2026 Maple-Tyne Technologies Inc.</p>
 				</div>
 			</div>
@@ -92,10 +100,29 @@ import OntarioEdge from '../components/OntarioEdge.astro';
     justify-content: flex-end;
   }
 
-  .location {
+  .footer-links {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--color-accent);
+    font-size: 0.75rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-link {
+    color: var(--color-text);
+    opacity: 0.6;
+    text-decoration: none;
+  }
+
+  .footer-link:hover {
+    opacity: 1;
+    color: var(--color-secondary);
+  }
+
+  .separator {
+    opacity: 0.2;
+    color: var(--color-text);
   }
 
   .copyright {
@@ -117,6 +144,11 @@ import OntarioEdge from '../components/OntarioEdge.astro';
     }
     .footer-details {
       align-items: center;
+    }
+    .footer-links {
+      justify-content: center;
+      margin-top: 1rem;
+      flex-wrap: wrap;
     }
 	}
 </style>

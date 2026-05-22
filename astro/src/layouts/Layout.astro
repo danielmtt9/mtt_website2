@@ -17,7 +17,7 @@ const { title, description = "Maple Tyne Technologies - Tech Venture Studio & En
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/logo/logo.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
     <script is:inline>
@@ -41,10 +41,122 @@ const { title, description = "Maple Tyne Technologies - Tech Venture Studio & En
 	<body>
     <header>
       <div class="nav-container">
-        <Logo size="small" />
-        <ThemeToggle />
+        <a href="/" class="brand-link" aria-label="Maple Tyne Home">
+          <Logo size="small" showText={true} />
+        </a>
+        <nav class="nav-links">
+          <a href="#ventures">Ventures</a>
+          <a href="#technology">Technology</a>
+          <a href="#about">About</a>
+        </nav>
+        <div class="nav-actions">
+          <div class="status-badge active" aria-label="System status: Active">
+            <span class="dot"></span>
+            <span class="status-text">SYS_STATUS: ACTIVE</span>
+          </div>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
 		<slot />
 	</body>
 </html>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 2rem;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .brand-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    opacity: 0.8;
+  }
+
+  .nav-links a:hover {
+    opacity: 1;
+    color: var(--color-accent);
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .status-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    header {
+      padding: 1rem 1rem;
+    }
+    
+    .nav-links {
+      display: none;
+    }
+
+    .status-text {
+      display: none;
+    }
+    
+    .status-badge {
+      padding: 0.35rem;
+      border-radius: 50%;
+    }
+    
+    .status-badge .dot {
+      margin: 0;
+    }
+  }
+</style>

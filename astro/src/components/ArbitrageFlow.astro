@@ -1,0 +1,134 @@
+---
+---
+<div class="flow-container">
+  <svg class="flow-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Grid lines / Background Schematic Grid -->
+    <defs>
+      <pattern id="schematic-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.02)" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#schematic-grid)" rx="8" />
+
+    <!-- Connection Paths -->
+    <!-- Solar to Battery (Charging) -->
+    <path class="flow-path path-charging" d="M 80 50 L 80 150" stroke="var(--color-accent)" stroke-width="2" />
+    
+    <!-- Grid to Battery (Charging) -->
+    <path class="flow-path path-charging" d="M 320 50 L 80 150" stroke="var(--color-accent)" stroke-width="2" opacity="0.4" />
+    
+    <!-- EV Battery to Home (V2H Arbitrage) -->
+    <path class="flow-path path-arbitrage" d="M 80 150 L 320 150" stroke="var(--color-accent)" stroke-width="3" />
+    
+    <!-- Solar to Home (Direct Use) -->
+    <path class="flow-path path-direct" d="M 80 50 L 320 150" stroke="var(--color-secondary)" stroke-width="2" />
+    
+    <!-- Grid to Home (Grid Power) -->
+    <path class="flow-path path-grid" d="M 320 50 L 320 150" stroke="var(--color-secondary)" stroke-width="2" opacity="0.3" />
+
+    <!-- Node Circles & Labels -->
+    <!-- Solar Node -->
+    <g class="node" transform="translate(80, 50)">
+      <circle r="18" fill="var(--color-card-bg)" stroke="var(--color-secondary)" stroke-width="2" />
+      <path d="M-8-8 L8 8 M8-8 L-8 8" stroke="var(--color-secondary)" stroke-width="1.5" opacity="0.5" />
+      <circle r="6" fill="var(--color-amber)" />
+      <text y="-25" text-anchor="middle" class="node-label">SOLAR</text>
+    </g>
+
+    <!-- Grid Node -->
+    <g class="node" transform="translate(320, 50)">
+      <circle r="18" fill="var(--color-card-bg)" stroke="var(--color-secondary)" stroke-width="2" />
+      <path d="M-10 0 L10 0 M0 -10 L0 10" stroke="var(--color-secondary)" stroke-width="1.5" opacity="0.5" />
+      <circle r="5" fill="var(--color-secondary)" />
+      <text y="-25" text-anchor="middle" class="node-label">GRID</text>
+    </g>
+
+    <!-- EV Battery Node -->
+    <g class="node" transform="translate(80, 150)">
+      <circle r="22" fill="var(--color-card-bg)" stroke="var(--color-accent)" stroke-width="2" />
+      <!-- Battery icon inside node -->
+      <rect x="-10" y="-7" width="20" height="14" rx="2" stroke="var(--color-accent)" stroke-width="2" fill="none" />
+      <rect x="10" y="-3" width="2" height="6" fill="var(--color-accent)" />
+      <rect x="-6" y="-4" width="8" height="8" fill="var(--color-accent)" />
+      <text y="32" text-anchor="middle" class="node-label accent">EV_BATTERY</text>
+    </g>
+
+    <!-- Home Node -->
+    <g class="node" transform="translate(320, 150)">
+      <circle r="22" fill="var(--color-card-bg)" stroke="var(--color-secondary)" stroke-width="2" />
+      <!-- House icon inside node -->
+      <path d="M-10 5 L-10 -3 L0 -10 L10 -3 L10 5 Z" stroke="var(--color-secondary)" stroke-width="2" fill="none" />
+      <rect x="-3" y="0" width="6" height="5" fill="var(--color-secondary)" />
+      <text y="32" text-anchor="middle" class="node-label">HOME</text>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .flow-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+  }
+
+  .flow-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .flow-path {
+    stroke-dasharray: 8 6;
+    animation: flow-run 6s infinite linear;
+  }
+
+  /* Different speed and direction offsets for paths */
+  .path-charging {
+    animation-duration: 4s;
+  }
+
+  .path-arbitrage {
+    animation-duration: 3s;
+    stroke-dasharray: 10 5;
+  }
+
+  .path-direct {
+    animation-duration: 5s;
+  }
+
+  .path-grid {
+    animation-duration: 8s;
+  }
+
+  @keyframes flow-run {
+    to {
+      stroke-dashoffset: -28;
+    }
+  }
+
+  .node-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    fill: var(--color-text);
+    letter-spacing: 0.05rem;
+    font-weight: 600;
+  }
+
+  .node-label.accent {
+    fill: var(--color-accent);
+  }
+
+  /* Ambient hover state animations */
+  .node:hover circle {
+    filter: drop-shadow(0 0 6px var(--color-secondary));
+    transition: filter 0.2s ease;
+  }
+  
+  .node:hover circle[stroke="var(--color-accent)"] {
+    filter: drop-shadow(0 0 6px var(--color-accent));
+  }
+</style>

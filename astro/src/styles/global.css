@@ -1,29 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=JetBrains+Mono:wght@400..800&family=Outfit:wght@100..900&display=swap');
 
 :root {
-  /* Logo Colors */
-  --logo-green: #4CAF50;
-  --logo-blue: #B3E5FC;
-  --logo-black: #121212;
-  
-  /* Light Theme (Default-ish, but usually we start dark for premium tech) */
-  --color-bg: #FFFFFF;
-  --color-text: #121212;
-  --color-card-bg: #F8F9FA;
-  --color-border: #E0E0E0;
-  --color-accent: var(--logo-green);
-  --color-secondary: #0288D1;
-  --header-bg: rgba(255, 255, 255, 0.8);
-}
-
-[data-theme="dark"] {
+  /* Default Dark Theme Aesthetic */
   --color-bg: #0A0A0A;
   --color-text: #F5F5F5;
   --color-card-bg: #141414;
   --color-border: #262626;
-  --color-accent: #66BB6A;
-  --color-secondary: #29B6F6;
+  --color-accent: #66BB6A;       /* Success/Active Green */
+  --color-secondary: #29B6F6;    /* Info/Monospace Blue */
+  --color-amber: #FFB74D;        /* Warning/Config Required Amber */
+  --color-red: #EF5350;          /* Error State Red */
   --header-bg: rgba(10, 10, 10, 0.8);
+  
+  /* Typography */
+  --font-sans: 'Outfit', sans-serif;
+  --font-serif: 'Fraunces', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Grid Layout variables */
+  --breakpoint-mobile: 767px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+}
+
+[data-theme="light"] {
+  --color-bg: #FFFFFF;
+  --color-text: #121212;
+  --color-card-bg: #F8F9FA;
+  --color-border: #E0E0E0;
+  --color-accent: #4CAF50;
+  --color-secondary: #0288D1;
+  --color-amber: #F57C00;
+  --color-red: #D32F2F;
+  --header-bg: rgba(255, 255, 255, 0.8);
 }
 
 * {
@@ -34,7 +43,7 @@
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
@@ -47,24 +56,44 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text);
 }
 
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background-color: var(--header-bg);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-border);
-  padding: 1rem 2rem;
+/* Keyboard Focus & Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-secondary) !important;
+  outline-offset: 4px !important;
 }
 
-.nav-container {
+/* Interactive elements transition rules */
+a, button, input, select, textarea, .tactile-card {
+  transition: all 0.3s ease;
+}
+
+/* Base Bento Grid Configuration */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 4rem auto;
+  padding: 0 2rem;
 }
 
+@media (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5rem;
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+/* Tactile Card Foundation */
 .tactile-card {
   background-color: var(--color-card-bg);
   border: 1px solid var(--color-border);
@@ -76,16 +105,28 @@ header {
 }
 
 .tactile-card:hover {
-  transform: translateY(-8px);
   border-color: var(--color-accent);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 
+/* Dynamic 3D mouse tilt properties for desktop */
+@media (min-width: 1024px) {
+  .tilt-card-container {
+    perspective: 1000px;
+  }
+  
+  .tilt-card-inner {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+}
+
+/* Text Badges & Tags */
 .tag {
   display: inline-block;
   padding: 0.35rem 1rem;
-  background-color: rgba(76, 175, 80, 0.1);
-  color: var(--color-accent);
+  background-color: rgba(41, 182, 246, 0.1);
+  color: var(--color-secondary);
   border-radius: 100px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -94,37 +135,100 @@ header {
   margin-bottom: 1.5rem;
 }
 
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 4rem auto;
-  padding: 0 2rem;
+.tag.green {
+  background-color: rgba(102, 187, 106, 0.1);
+  color: var(--color-accent);
 }
 
-@media (max-width: 1024px) {
-  .bento-grid {
-    grid-template-columns: repeat(6, 1fr);
+.tag.amber {
+  background-color: rgba(255, 183, 77, 0.1);
+  color: var(--color-amber);
+}
+
+.tag.red {
+  background-color: rgba(239, 83, 80, 0.1);
+  color: var(--color-red);
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.status-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-badge.active .dot {
+  background-color: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent);
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+.status-badge.amber .dot {
+  background-color: var(--color-amber);
+  box-shadow: 0 0 8px var(--color-amber);
+}
+
+.status-badge.red .dot {
+  background-color: var(--color-red);
+  box-shadow: 0 0 8px var(--color-red);
+}
+
+/* Common Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    box-shadow: 0 0 4px var(--color-accent);
+  }
+  50% {
+    opacity: 1.0;
+    box-shadow: 0 0 12px var(--color-accent);
   }
 }
 
-@media (max-width: 768px) {
-  .bento-grid {
-    grid-template-columns: 1fr;
-    padding: 0 1.5rem;
+@keyframes pulse-glow-amber {
+  0%, 100% {
+    opacity: 0.4;
+    box-shadow: 0 0 4px var(--color-amber);
+  }
+  50% {
+    opacity: 1.0;
+    box-shadow: 0 0 12px var(--color-amber);
   }
 }
 
-/* Premium Gradients */
+.pulsing-glow-amber {
+  animation: pulse-glow-amber 2s infinite ease-in-out;
+}
+
+/* Utility classes */
 .gradient-text {
   background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.profit-highlight {
-  color: var(--color-accent);
-  font-weight: 800;
-  text-shadow: 0 0 20px rgba(102, 187, 106, 0.3);
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

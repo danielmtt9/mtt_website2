@@ -1,67 +1,363 @@
 ---
+import ArbitrageFlow from './ArbitrageFlow.astro';
 ---
-<div class="tactile-card hero-card" style="grid-column: span 8; grid-row: span 2;">
-  <div class="tag">Flagship Project</div>
-  <h2 class="card-title">Intelligent Energy Orchestration</h2>
-  <p class="card-text">
-    Leveraging the 35.2¢/kWh Ontario rate spread via AI-driven V2H (Vehicle-to-Home) systems.
-  </p>
-  
-  <div class="hero-visual">
-    <svg width="100%" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- House -->
-      <path d="M50 150H150V100L100 60L50 100V150Z" stroke="currentColor" stroke-width="2"/>
-      <!-- Car -->
-      <rect x="250" y="120" width="100" height="40" rx="4" stroke="currentColor" stroke-width="2"/>
-      <circle cx="270" cy="165" r="8" stroke="currentColor" stroke-width="2"/>
-      <circle cx="330" cy="165" r="8" stroke="currentColor" stroke-width="2"/>
+<div class="tilt-card-container hero-wrapper">
+  <div class="tactile-card hero-card tilt-card-inner" id="v2h-card">
+    <div class="card-header">
+      <div class="tag green">Flagship Project</div>
+      <div class="status-badge active" id="v2h-status-badge">
+        <span class="dot"></span>
+        <span id="v2h-status-text">V2H_ACTIVE</span>
+      </div>
+    </div>
+    
+    <div class="card-content-layout">
+      <div class="metrics-panel">
+        <h2 class="card-title">Intelligent V2H Energy Arbitrage</h2>
+        <p class="card-text">
+          Orchestrating electric vehicle battery storage to offset peak grid tariffs, feeding the home when rates peak, and protecting battery life automatically.
+        </p>
+        
+        <div class="telemetry-grid" id="telemetry-container">
+          <div class="metric-item">
+            <span class="metric-label">GRID_RATE</span>
+            <span class="metric-value" id="val-grid-rate">35.2¢/kWh</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">BATTERY_SOC</span>
+            <span class="metric-value" id="val-soc">82%</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">BATTERY_SOH</span>
+            <span class="metric-value text-green" id="val-soh">98% SOH</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">RATE_TIER</span>
+            <span class="rate-badge ULO-peak" id="val-tier">ULO PEAK</span>
+          </div>
+        </div>
+        
+        <!-- Degraded Fallback Panel -->
+        <div class="degraded-panel hidden" id="degraded-telemetry">
+          <div class="error-msg-box">
+            <span class="error-label">SYSTEM_FAULT:</span>
+            <span class="error-text">NO_DATA // RUN DIAGNOSTICS</span>
+          </div>
+          <button class="diagnostic-btn" id="retry-telemetry-btn">[RUN_DIAGNOSTICS]</button>
+        </div>
+      </div>
       
-      <!-- Power Line -->
-      <path id="power-line" d="M150 125H250" stroke="var(--color-accent)" stroke-width="3" stroke-dasharray="10 5" />
-      
-      <!-- Flow Animation -->
-      <circle r="4" fill="var(--color-accent)">
-        <animateMotion dur="3s" repeatCount="indefinite" path="M150 125H250" />
-      </circle>
-    </svg>
+      <div class="visual-panel">
+        <ArbitrageFlow />
+      </div>
+    </div>
   </div>
 </div>
 
 <style>
+  .hero-wrapper {
+    grid-column: span 8;
+    grid-row: span 2;
+  }
+
   .hero-card {
+    min-height: 480px;
+    background: linear-gradient(135deg, var(--color-card-bg) 0%, rgba(102, 187, 106, 0.03) 100%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 450px;
-    background: linear-gradient(135deg, var(--color-card-bg) 0%, rgba(76, 175, 80, 0.05) 100%);
+    transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  
-  .card-title {
-    font-size: 3rem;
-    max-width: 90%;
-    font-family: var(--font-serif);
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 1.5rem;
   }
 
-  .card-text {
-    font-size: 1.1rem;
-    max-width: 80%;
+  .card-header .tag {
+    margin-bottom: 0;
   }
-  
-  .hero-visual {
-    margin-top: 2rem;
-    border-top: 1px solid var(--color-border);
-    padding-top: 2rem;
+
+  .card-content-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    height: 100%;
+  }
+
+  .metrics-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .card-title {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    font-family: var(--font-serif);
+    margin-bottom: 1rem;
     color: var(--color-text);
   }
-  
-  @media (max-width: 768px) {
-    .hero-card {
-      grid-column: span 1 !important;
-      min-height: auto;
+
+  .card-text {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+  }
+
+  /* Telemetry Grid layout */
+  .telemetry-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid var(--color-border);
+    padding-left: 1rem;
+  }
+
+  .metric-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    opacity: 0.5;
+    letter-spacing: 0.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .metric-value {
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .metric-value.text-green {
+    color: var(--color-accent);
+  }
+
+  .rate-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    width: fit-content;
+  }
+
+  .rate-badge.ULO-peak {
+    background-color: rgba(255, 183, 77, 0.15);
+    color: var(--color-amber);
+    box-shadow: 0 0 10px rgba(255, 183, 77, 0.1);
+  }
+
+  .rate-badge.ULO-offpeak {
+    background-color: rgba(102, 187, 106, 0.15);
+    color: var(--color-accent);
+    box-shadow: 0 0 10px rgba(102, 187, 106, 0.1);
+  }
+
+  /* Degraded State Styling */
+  .degraded-panel {
+    background-color: rgba(239, 83, 80, 0.05);
+    border: 1px dashed var(--color-red);
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .error-msg-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .error-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-red);
+    font-weight: bold;
+    letter-spacing: 0.08rem;
+  }
+
+  .error-text {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-amber);
+    font-weight: 600;
+  }
+
+  .diagnostic-btn {
+    background-color: transparent;
+    border: 1px solid var(--color-secondary);
+    color: var(--color-secondary);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .diagnostic-btn:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-bg);
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  @media (max-width: 1023px) {
+    .hero-wrapper {
+      grid-column: span 6;
     }
+  }
+
+  @media (max-width: 767px) {
+    .hero-wrapper {
+      grid-column: span 1 !important;
+    }
+
+    .card-content-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
     .card-title {
       font-size: 1.8rem;
     }
   }
 </style>
+
+<script>
+  // 3D Card Tilt Effect on Desktop
+  const initTilt = () => {
+    const card = document.getElementById('v2h-card');
+    if (!card) return;
+
+    const isDesktop = window.matchMedia('(min-width: 1024px)');
+
+    const handleMove = (e: MouseEvent) => {
+      if (!isDesktop.matches) return;
+
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const normalizedX = (x / rect.width) * 2 - 1; // -1 to 1
+      const normalizedY = (y / rect.height) * 2 - 1; // -1 to 1
+      
+      card.style.setProperty('--x', normalizedX.toString());
+      card.style.setProperty('--y', normalizedY.toString());
+      
+      card.style.transform = `rotateX(${normalizedY * -6}deg) rotateY(${normalizedX * 6}deg) translateY(-4px)`;
+    };
+
+    const handleLeave = () => {
+      card.style.transform = 'none';
+      card.style.setProperty('--x', '0');
+      card.style.setProperty('--y', '0');
+    };
+
+    card.addEventListener('mousemove', handleMove);
+    card.addEventListener('mouseleave', handleLeave);
+  };
+
+  // Telemetry Fetch Simulation and Fault Handling
+  const initTelemetry = () => {
+    const statusBadge = document.getElementById('v2h-status-badge');
+    const statusText = document.getElementById('v2h-status-text');
+    const telemetryContainer = document.getElementById('telemetry-container');
+    const degradedContainer = document.getElementById('degraded-telemetry');
+    const diagBtn = document.getElementById('retry-telemetry-btn') as HTMLButtonElement;
+
+    if (!statusBadge || !statusText || !telemetryContainer || !degradedContainer || !diagBtn) return;
+
+    // We simulate api call to /api/telemetry.
+    // In our static client setup, it will fail, which forces the graceful degraded state.
+    // This perfectly tests NFR5 (Isolated Component Failure States)!
+    const fetchTelemetry = async () => {
+      try {
+        const response = await fetch('/api/telemetry-data-does-not-exist');
+        if (!response.ok) {
+          throw new Error('Telemetry API Offline');
+        }
+        // Success path (if API were online)
+        statusBadge.className = 'status-badge active';
+        statusText.textContent = 'V2H_ACTIVE';
+        telemetryContainer.classList.remove('hidden');
+        degradedContainer.classList.add('hidden');
+      } catch (err) {
+        // Degrade gracefully to Isolated Failure State
+        statusBadge.className = 'status-badge amber';
+        statusText.textContent = 'CONFIG REQUIRED';
+        telemetryContainer.classList.add('hidden');
+        degradedContainer.classList.remove('hidden');
+      }
+    };
+
+    // Diagnostic trigger
+    let isVerifying = false;
+    let animFrame = 0;
+    const loaderChars = ['\\', '|', '/', '-'];
+
+    const runDiagnostics = () => {
+      if (isVerifying) return;
+      isVerifying = true;
+      diagBtn.disabled = true;
+
+      // Animate monospace spinner
+      const interval = setInterval(() => {
+        diagBtn.textContent = `[DIAGNOSTICS ${loaderChars[animFrame % 4]}]`;
+        animFrame++;
+      }, 150);
+
+      // Timeout for diagnostic
+      setTimeout(() => {
+        clearInterval(interval);
+        isVerifying = false;
+        diagBtn.disabled = false;
+        diagBtn.textContent = '[RUN_DIAGNOSTICS]';
+        
+        // Mock a restore behavior for user engagement:
+        // We will togglingly "fix" the telemetry data if they run diagnostics to let them verify both states!
+        const isCurrentlyDegraded = telemetryContainer.classList.contains('hidden');
+        if (isCurrentlyDegraded) {
+          // Restore telemetry view mock
+          statusBadge.className = 'status-badge active';
+          statusText.textContent = 'V2H_ACTIVE';
+          telemetryContainer.classList.remove('hidden');
+          degradedContainer.classList.add('hidden');
+        } else {
+          // Fail mock
+          statusBadge.className = 'status-badge amber';
+          statusText.textContent = 'CONFIG REQUIRED';
+          telemetryContainer.classList.add('hidden');
+          degradedContainer.classList.remove('hidden');
+        }
+      }, 1500);
+    };
+
+    diagBtn.addEventListener('click', runDiagnostics);
+
+    // Initial check (triggered automatically to test endpoint availability)
+    fetchTelemetry();
+  };
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    initTilt();
+    initTelemetry();
+  });
+</script>

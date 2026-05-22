@@ -7,7 +7,7 @@ interface Props {
 const { size = 'large', showText = true } = Astro.props;
 ---
 <div class={`logo-container ${size}`}>
-  <img src="/logo/logo.png" alt="Maple Tyne Technologies Logo" class="main-logo" />
+  <img src="/logo/logo.svg" alt="Maple Tyne Technologies Logo" class="main-logo" />
   {showText && (
     <div class="company-name">
       <h1 class={size === 'small' ? 'text-sm' : ''}>Maple-Tyne Technologies Inc.</h1>

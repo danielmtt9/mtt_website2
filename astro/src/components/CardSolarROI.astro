@@ -1,0 +1,352 @@
+---
+---
+<div class="tilt-card-container solar-wrapper">
+  <div class="tactile-card solar-card tilt-card-inner" id="solar-card">
+    <div class="card-header">
+      <div class="tag green">ROI Calculator</div>
+      <div class="badge-tech">
+        <span class="tech-icon">⚡</span>
+        <span class="tech-label">SOLAR_ESTIMATE_V1.1</span>
+      </div>
+    </div>
+    
+    <h3 class="card-title">Solar ROI Calculator</h3>
+    <p class="card-desc">Estimate your potential annual solar yield and investment payback period in real-time.</p>
+    
+    <div class="calculator-layout">
+      <!-- Sliders Panel -->
+      <div class="inputs-panel">
+        <div class="input-group">
+          <div class="label-row">
+            <label for="solar-size">System Size (kW)</label>
+            <span class="value-readout" id="size-readout">6.0 kW</span>
+          </div>
+          <div class="slider-container">
+            <input 
+              type="range" 
+              id="solar-size" 
+              min="2.0" 
+              max="20.0" 
+              step="0.5" 
+              value="6.0" 
+              aria-label="Solar System Size in kilowatts"
+            />
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <div class="label-row">
+            <label for="elec-rate">Electricity Rate ($/kWh)</label>
+            <span class="value-readout" id="rate-readout">$0.18</span>
+          </div>
+          <div class="slider-container">
+            <input 
+              type="range" 
+              id="elec-rate" 
+              min="0.05" 
+              max="0.50" 
+              step="0.01" 
+              value="0.18" 
+              aria-label="Electricity Rate in dollars per kilowatt hour"
+            />
+          </div>
+        </div>
+      </div>
+      
+      <!-- Real-time Outputs -->
+      <div class="results-panel">
+        <div class="result-row">
+          <span class="result-label">EST_ANNUAL_YIELD</span>
+          <span class="result-value" id="val-yield">6,900 kWh</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">EST_ANNUAL_SAVINGS</span>
+          <span class="result-value text-green" id="val-savings">$1,242.00</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">EST_SYSTEM_COST</span>
+          <span class="result-value" id="val-cost">$18,000.00</span>
+        </div>
+        <div class="result-row highlight-box">
+          <span class="result-label">PAYBACK_PERIOD</span>
+          <span class="result-value text-blue" id="val-payback">14.5 Years</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .solar-wrapper {
+    grid-column: span 4;
+  }
+
+  .solar-card {
+    background: linear-gradient(135deg, var(--color-card-bg) 0%, rgba(41, 182, 246, 0.02) 100%);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .card-header .tag {
+    margin-bottom: 0;
+  }
+
+  .badge-tech {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text);
+    opacity: 0.4;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-family: var(--font-serif);
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .calculator-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  .inputs-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .label-row label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  .value-readout {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+  }
+
+  /* Touch-friendly Slider Style (>=48px touch target height) */
+  .slider-container {
+    height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .slider-container input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--color-border);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 10px rgba(102, 187, 106, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+  }
+
+  .slider-container input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 10px rgba(102, 187, 106, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+  }
+
+  .slider-container input[type="range"]:focus-visible::-webkit-slider-thumb {
+    background: var(--color-secondary);
+    box-shadow: 0 0 12px var(--color-secondary);
+    transform: scale(1.2);
+  }
+
+  .slider-container input[type="range"]:focus-visible::-moz-range-thumb {
+    background: var(--color-secondary);
+    box-shadow: 0 0 12px var(--color-secondary);
+    transform: scale(1.2);
+  }
+
+  /* Results Panel */
+  .results-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.25rem;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.5rem;
+  }
+
+  .result-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .result-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    opacity: 0.5;
+    letter-spacing: 0.05rem;
+  }
+
+  .result-value {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .result-value.text-green {
+    color: var(--color-accent);
+  }
+
+  .result-value.text-blue {
+    color: var(--color-secondary);
+  }
+
+  .highlight-box {
+    background-color: rgba(41, 182, 246, 0.05);
+    border: 1px solid rgba(41, 182, 246, 0.15);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 1023px) {
+    .solar-wrapper {
+      grid-column: span 6;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .solar-wrapper {
+      grid-column: span 1 !important;
+    }
+    
+    .solar-card {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  const initSolarROI = () => {
+    const card = document.getElementById('solar-card');
+    const sizeInput = document.getElementById('solar-size') as HTMLInputElement;
+    const rateInput = document.getElementById('elec-rate') as HTMLInputElement;
+    
+    const sizeReadout = document.getElementById('size-readout');
+    const rateReadout = document.getElementById('rate-readout');
+    
+    const valYield = document.getElementById('val-yield');
+    const valSavings = document.getElementById('val-savings');
+    const valCost = document.getElementById('val-cost');
+    const valPayback = document.getElementById('val-payback');
+
+    if (!card || !sizeInput || !rateInput || !sizeReadout || !rateReadout || !valYield || !valSavings || !valCost || !valPayback) return;
+
+    // Desktop 3D tilt tracking (matches CardHero)
+    const isDesktop = window.matchMedia('(min-width: 1024px)');
+    
+    const handleMove = (e: MouseEvent) => {
+      if (!isDesktop.matches) return;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const normalizedX = (x / rect.width) * 2 - 1;
+      const normalizedY = (y / rect.height) * 2 - 1;
+      card.style.transform = `rotateX(${normalizedY * -6}deg) rotateY(${normalizedX * 6}deg) translateY(-4px)`;
+    };
+
+    const handleLeave = () => {
+      card.style.transform = 'none';
+    };
+
+    card.addEventListener('mousemove', handleMove);
+    card.addEventListener('mouseleave', handleLeave);
+
+    // Dynamic Calculations
+    const updateCalculations = () => {
+      const size = parseFloat(sizeInput.value);
+      const rate = parseFloat(rateInput.value);
+
+      // Readouts
+      sizeReadout.textContent = `${size.toFixed(1)} kW`;
+      rateReadout.textContent = `$${rate.toFixed(2)}`;
+
+      // Calculation formulas
+      const yieldVal = size * 1150;
+      const savingsVal = yieldVal * rate;
+      const costVal = size * 3000;
+      const paybackVal = savingsVal > 0 ? costVal / savingsVal : 0;
+
+      // Format output values
+      valYield.textContent = `${Math.round(yieldVal).toLocaleString()} kWh`;
+      valSavings.textContent = `$${savingsVal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      valCost.textContent = `$${costVal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      valPayback.textContent = paybackVal > 0 ? `${paybackVal.toFixed(1)} Years` : 'N/A';
+    };
+
+    sizeInput.addEventListener('input', updateCalculations);
+    rateInput.addEventListener('input', updateCalculations);
+
+    // Initial run
+    updateCalculations();
+  };
+
+  document.addEventListener('DOMContentLoaded', initSolarROI);
+</script>
