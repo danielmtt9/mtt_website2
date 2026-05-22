@@ -29,7 +29,13 @@
     box-shadow: 0 0 10px var(--color-power-green);
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
+    .utility-card {
+      grid-column: span 6 !important;
+    }
+  }
+  
+  @media (max-width: 767px) {
     .utility-card {
       grid-column: span 1 !important;
     }
