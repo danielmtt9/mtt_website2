@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=JetBrains+Mono:wght@400..800&family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
 
 :root {
   /* Default Dark Theme Aesthetic */
   --color-bg: #0A0A0A;
-  --color-text: #F5F5F5;
+  --color-text: #FAFAFA;
   --color-card-bg: #141414;
   --color-border: #262626;
   --color-accent: #66BB6A;       /* Success/Active Green */
@@ -24,15 +25,15 @@
 }
 
 [data-theme="light"] {
-  --color-bg: #FFFFFF;
-  --color-text: #121212;
-  --color-card-bg: #F8F9FA;
-  --color-border: #E0E0E0;
-  --color-accent: #4CAF50;
-  --color-secondary: #0288D1;
+  --color-bg: #FCFCFC;
+  --color-text: #1A1A1A;
+  --color-card-bg: #FFFFFF;
+  --color-border: #E5E5E5;
+  --color-accent: #2E7D32;
+  --color-secondary: #0277BD;
   --color-amber: #F57C00;
-  --color-red: #D32F2F;
-  --header-bg: rgba(255, 255, 255, 0.8);
+  --color-red: #C62828;
+  --header-bg: rgba(252, 252, 252, 0.9);
 }
 
 * {
@@ -48,6 +49,7 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   overflow-x: hidden;
+  font-size: 1.125rem;
 }
 
 h1, h2, h3, h4, h5, h6 {

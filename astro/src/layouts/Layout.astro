@@ -6,35 +6,51 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
+	url?: string;
 }
 
-const { title, description = "Maple Tyne Technologies - Tech Venture Studio & Engineering Firm" } = Astro.props;
+const { title, description = "Maple Tyne Technologies - Tech Venture Studio & Engineering Firm", image = "/logo/logo.svg", url = "https://www.mapletynetechnologies.com" } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
+		<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/logo/logo.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={image} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={url} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={image} />
+
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
           return localStorage.getItem('theme');
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'dark';
         }
         return 'light';
       })();
     
       if (theme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.classList.remove('dark');
       } else {
         document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.classList.add('dark');
       }
     </script>
 	</head>
@@ -45,9 +61,10 @@ const { title, description = "Maple Tyne Technologies - Tech Venture Studio & En
           <Logo size="small" showText={true} />
         </a>
         <nav class="nav-links">
-          <a href="#ventures">Ventures</a>
-          <a href="#technology">Technology</a>
-          <a href="#about">About</a>
+          <a href="/ventures">Ventures</a>
+          <a href="/">Technology</a>
+          <a href="/about">About</a>
+          <a href="/blog">Blog</a>
         </nav>
         <div class="nav-actions">
           <div class="status-badge active" aria-label="System status: Active">

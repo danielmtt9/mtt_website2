@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Blog | Maple Tyne Technologies" description="Welcome to the Maple-Tyne Technologies blog, where we explore the intersection of automated infrastructure, energy markets, and data privacy.">
+	<main class="w-full flex justify-center bg-[var(--surface)] text-[var(--on-surface)]">
+		<div class="w-full max-w-[1280px] grid grid-cols-12 gap-6 p-8 min-h-screen">
+		  <!-- Header Module -->
+		  <div class="col-span-12 border border-[var(--outline)] rounded p-8 mb-8 relative overflow-hidden group">
+			<div class="absolute inset-0 bg-gradient-to-br from-[var(--surface-container)] to-[var(--surface)] opacity-50 z-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+			<div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-[var(--blueprint-line)] pb-6">
+			  <div>
+				<span class="inline-block px-3 py-1 bg-[var(--surface-container-high)] text-[var(--primary)] border border-[var(--primary)] rounded text-[12px] font-['JetBrains_Mono'] tracking-[0.05em] uppercase mb-4 shadow-[0_0_8px_rgba(118,220,134,0.3)]">
+				  [SYS_IDENT_INSIGHTS]
+				</span>
+				<h1 class="font-['Geist'] text-4xl md:text-5xl font-semibold tracking-tight text-[var(--data-highlight)] mb-2">
+				  Operational Logs.
+				</h1>
+				<p class="font-['JetBrains_Mono'] text-sm text-[var(--on-surface-variant)] uppercase tracking-wider">
+				  Intersection of Automated Infrastructure, Energy Markets & Data Privacy
+				</p>
+			  </div>
+			</div>
+		  </div>
+
+		  <!-- Intro Paragraph -->
+		  <div class="col-span-12 mb-4">
+			<p class="font-['Geist'] text-lg text-[var(--on-surface-variant)] max-w-3xl">
+			  Welcome to the Maple-Tyne Technologies blog. Here we publish deep dives and technical assessments regarding the deployment of structural, intelligent automation in residential and commercial spaces.
+			</p>
+		  </div>
+
+		  <!-- Articles Grid -->
+		  <div class="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+			<!-- Article 1 -->
+			<div class="border border-[var(--outline)] rounded p-6 bg-[var(--surface-card)] hover:border-[var(--primary)] transition-all duration-300 flex flex-col h-full group relative overflow-hidden">
+			  <div class="absolute top-0 left-0 w-full h-1 bg-[var(--status-progress)] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+			  <div class="mb-4">
+				<span class="inline-flex items-center px-2 py-1 bg-[#F57C00]/10 border border-[#F57C00]/30 text-[#F57C00] rounded text-[10px] font-['JetBrains_Mono'] tracking-widest uppercase">
+				  [ COMING_SOON ]
+				</span>
+			  </div>
+			  <h3 class="font-['Geist'] text-xl font-semibold text-[var(--data-highlight)] mb-3 leading-tight">
+				Turning Your EV into a Financial Asset
+			  </h3>
+			  <p class="font-['Geist'] text-sm text-[var(--on-surface-variant)] flex-grow leading-relaxed">
+				Discover how bidirectional V2H systems autonomously shift domestic loads to maximize the measurable return on investment of your electric vehicle and home solar array, all without requiring you to manually track changing utility structures.
+			  </p>
+			  <div class="mt-6 pt-4 border-t border-[var(--blueprint-line)] flex justify-between items-center">
+				<span class="font-['JetBrains_Mono'] text-xs text-[var(--outline)]">CAT: ENERGY_ARB</span>
+				<span class="text-[var(--primary)] font-['JetBrains_Mono'] text-sm group-hover:translate-x-2 transition-transform duration-300">-></span>
+			  </div>
+			</div>
+
+			<!-- Article 2 -->
+			<div class="border border-[var(--outline)] rounded p-6 bg-[var(--surface-card)] hover:border-[var(--primary)] transition-all duration-300 flex flex-col h-full group relative overflow-hidden">
+			  <div class="absolute top-0 left-0 w-full h-1 bg-[var(--status-progress)] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+			  <div class="mb-4">
+				<span class="inline-flex items-center px-2 py-1 bg-[#F57C00]/10 border border-[#F57C00]/30 text-[#F57C00] rounded text-[10px] font-['JetBrains_Mono'] tracking-widest uppercase">
+				  [ COMING_SOON ]
+				</span>
+			  </div>
+			  <h3 class="font-['Geist'] text-xl font-semibold text-[var(--data-highlight)] mb-3 leading-tight">
+				Capitalizing on the "Ontario Edge"
+			  </h3>
+			  <p class="font-['Geist'] text-sm text-[var(--on-surface-variant)] flex-grow leading-relaxed">
+				An analysis of how extreme time-of-use (TOU) utility rate structures, like Ontario's Ultra-Low Overnight (ULO) rates, provide an ideal macroeconomic landscape for automated residential energy arbitrage. Learn how capturing the 35.2¢/kWh spread can potentially generate an estimated $1,200 to $1,800 in annual household savings.
+			  </p>
+			  <div class="mt-6 pt-4 border-t border-[var(--blueprint-line)] flex justify-between items-center">
+				<span class="font-['JetBrains_Mono'] text-xs text-[var(--outline)]">CAT: FINANCIAL_MODEL</span>
+				<span class="text-[var(--primary)] font-['JetBrains_Mono'] text-sm group-hover:translate-x-2 transition-transform duration-300">-></span>
+			  </div>
+			</div>
+
+			<!-- Article 3 -->
+			<div class="border border-[var(--outline)] rounded p-6 bg-[var(--surface-card)] hover:border-[var(--primary)] transition-all duration-300 flex flex-col h-full group relative overflow-hidden">
+			  <div class="absolute top-0 left-0 w-full h-1 bg-[var(--status-progress)] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+			  <div class="mb-4">
+				<span class="inline-flex items-center px-2 py-1 bg-[#F57C00]/10 border border-[#F57C00]/30 text-[#F57C00] rounded text-[10px] font-['JetBrains_Mono'] tracking-widest uppercase">
+				  [ COMING_SOON ]
+				</span>
+			  </div>
+			  <h3 class="font-['Geist'] text-xl font-semibold text-[var(--data-highlight)] mb-3 leading-tight">
+				The Critical Importance of Sovereign Data Privacy
+			  </h3>
+			  <p class="font-['Geist'] text-sm text-[var(--on-surface-variant)] flex-grow leading-relaxed">
+				Why your smart home shouldn't rely on the cloud. We discuss how local execution ensures your household operational patterns stay entirely private, fully immunizing your home from unexpected internet outages, server-side data breaches, and creeping subscription fees.
+			  </p>
+			  <div class="mt-6 pt-4 border-t border-[var(--blueprint-line)] flex justify-between items-center">
+				<span class="font-['JetBrains_Mono'] text-xs text-[var(--outline)]">CAT: ARCHITECTURE</span>
+				<span class="text-[var(--primary)] font-['JetBrains_Mono'] text-sm group-hover:translate-x-2 transition-transform duration-300">-></span>
+			  </div>
+			</div>
+
+		  </div>
+		</div>
+	</main>
+</Layout>
