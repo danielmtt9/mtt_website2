@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Ventures | Maple Tyne Technologies" description="As a Venture Studio, we develop a diverse ecosystem of platforms that demonstrate our capacity for end-to-end operational automation.">
+	<main class="page-container">
+    <section class="page-header">
+      <h1 class="gradient-text">Ventures</h1>
+    </section>
+
+		<div class="content-section">
+      <p class="intro">As a Venture Studio, we develop a diverse ecosystem of platforms that demonstrate our capacity for end-to-end operational automation.</p>
+
+      <div class="venture-card tactile-card">
+        <h2>Intelligent Energy Orchestration <span class="tag green">Flagship Project</span></h2>
+        <p>An AI-native, local-first energy orchestration platform designed to turn standard residential electric vehicles into active financial assets.</p>
+        <p>By autonomously managing bidirectional vehicle-to-home (V2H) energy arbitrage, the system automatically capitalizes on deep electricity tariff differentials.</p>
+        <p>It features true hardware neutrality—communicating seamlessly with multi-vendor hardware—and uses predictive smoothing logic to protect EV battery bounds and prevent rapid cycle wear.</p>
+      </div>
+
+      <div class="venture-card tactile-card">
+        <h2>Invoice Generator <span class="tag secondary">Utility</span></h2>
+        <p>A micro-SaaS platform engineered for high-speed billing and workflow automation.</p>
+        <p>This utility showcases our lightweight deployment strategies and frictionless client-side financial engineering, designed for maximum operational speed.</p>
+      </div>
+
+      <div class="venture-card tactile-card">
+        <h2>EcoAudit Canada <span class="tag amber">Venture Lab</span></h2>
+        <p>Currently in active development, this compliance-first sustainability analytics platform is automating the future of Canadian carbon auditing.</p>
+      </div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.page-container {
+		width: 100%;
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 4rem 2rem;
+	}
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+  }
+
+  .intro {
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+  }
+
+  .venture-card {
+    margin-bottom: 2rem;
+    padding: 2rem;
+  }
+
+  .venture-card h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .venture-card p {
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .venture-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .tag.secondary {
+    background-color: rgba(41, 182, 246, 0.1);
+    color: var(--color-secondary);
+  }
+</style>

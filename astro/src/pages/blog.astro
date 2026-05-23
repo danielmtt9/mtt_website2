@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Blog | Maple Tyne Technologies" description="Welcome to the Maple-Tyne Technologies blog, where we explore the intersection of automated infrastructure, energy markets, and data privacy.">
+	<main class="page-container">
+    <section class="page-header">
+      <h1 class="gradient-text">Blog</h1>
+    </section>
+
+		<div class="content-section">
+      <p class="intro">Welcome to the Maple-Tyne Technologies blog, where we explore the intersection of automated infrastructure, energy markets, and data privacy.</p>
+
+      <div class="articles-grid">
+        <article class="tactile-card">
+          <div class="status-badge amber" style="margin-bottom: 1rem;">
+            <span class="dot"></span>
+            <span class="status-text">COMING SOON</span>
+          </div>
+          <h2>Turning Your EV into a Financial Asset</h2>
+          <p>Discover how bidirectional V2H systems autonomously shift domestic loads to maximize the measurable return on investment of your electric vehicle and home solar array, all without requiring you to manually track changing utility structures.</p>
+        </article>
+
+        <article class="tactile-card">
+          <div class="status-badge amber" style="margin-bottom: 1rem;">
+            <span class="dot"></span>
+            <span class="status-text">COMING SOON</span>
+          </div>
+          <h2>Capitalizing on the "Ontario Edge"</h2>
+          <p>An analysis of how extreme time-of-use (TOU) utility rate structures, like Ontario's Ultra-Low Overnight (ULO) rates, provide an ideal macroeconomic landscape for automated residential energy arbitrage. Learn how capturing the 35.2¢/kWh spread can potentially generate an estimated $1,200 to $1,800 in annual household savings.</p>
+        </article>
+
+        <article class="tactile-card">
+          <div class="status-badge amber" style="margin-bottom: 1rem;">
+            <span class="dot"></span>
+            <span class="status-text">COMING SOON</span>
+          </div>
+          <h2>The Critical Importance of Sovereign Data Privacy</h2>
+          <p>Why your smart home shouldn't rely on the cloud. We discuss how local execution ensures your household operational patterns stay entirely private, fully immunizing your home from unexpected internet outages, server-side data breaches, and creeping subscription fees.</p>
+        </article>
+      </div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.page-container {
+		width: 100%;
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 4rem 2rem;
+	}
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+  }
+
+  .intro {
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+  }
+
+  .articles-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  article h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  article p {
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+</style>
