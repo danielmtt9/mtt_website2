@@ -3,41 +3,86 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="About Us | Maple Tyne Technologies" description="Based in Toronto, Ontario, Maple-Tyne Technologies Inc. is a Tech Venture Studio and Engineering Firm specializing in high-utility orchestration.">
-	<main class="page-container">
-    <section class="page-header">
-      <h1 class="gradient-text">About Us</h1>
-    </section>
+	<main class="w-full flex justify-center bg-[var(--surface)] text-[var(--on-surface)]">
+		<div class="w-full max-w-[1280px] grid grid-cols-12 gap-6 p-8 min-h-screen">
+		  <!-- Header Module -->
+		  <div class="col-span-12 border border-[var(--outline)] rounded p-8 mb-8 relative overflow-hidden group">
+			<div class="absolute inset-0 bg-gradient-to-br from-[var(--surface-container)] to-[var(--surface)] opacity-50 z-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+			<div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-[var(--blueprint-line)] pb-6">
+			  <div>
+				<span class="inline-block px-3 py-1 bg-[var(--surface-container-high)] text-[var(--primary)] border border-[var(--primary)] rounded text-[12px] font-['JetBrains_Mono'] tracking-[0.05em] uppercase mb-4 shadow-[0_0_8px_rgba(118,220,134,0.3)]">
+				  [SYS_IDENT_ABOUT]
+				</span>
+				<h1 class="font-['Geist'] text-4xl md:text-5xl font-semibold tracking-tight text-[var(--data-highlight)] mb-2">
+				  Operational Core.
+				</h1>
+				<p class="font-['JetBrains_Mono'] text-sm text-[var(--on-surface-variant)] uppercase tracking-wider">
+				  Maple Tyne Technologies Inc. // Est. 2026
+				</p>
+			  </div>
+			  <div class="mt-6 md:mt-0 text-right">
+				<p class="font-['JetBrains_Mono'] text-xs text-[var(--outline)] uppercase mb-1">Status</p>
+				<div class="flex items-center space-x-2">
+				  <span class="w-2 h-2 rounded-full bg-[var(--status-active)] shadow-[0_0_6px_var(--status-active)]"></span>
+				  <span class="font-['JetBrains_Mono'] text-sm text-[var(--status-active)]">[ACTIVE_DEPLOYMENT]</span>
+				</div>
+			  </div>
+			</div>
+		  </div>
 
-		<div class="content-section">
-      <p>Based in Toronto, Ontario, Maple-Tyne Technologies Inc. is a Tech Venture Studio and Engineering Firm specializing in high-utility orchestration.</p>
-      <p>We build automated infrastructure spanning energy and financial services.</p>
-      <p>Our core mission is to act as a unified force for structural, intelligent automation by blending advanced hardware interfaces with everyday digital utilities.</p>
-      <p>We are dedicated to building systems that provide absolute peace of mind, ensure sovereign data privacy, and operate independently of restrictive, vendor-locked ecosystems.</p>
+		  <!-- Mission Section -->
+		  <div class="col-span-12 md:col-span-8 border border-[var(--outline)] rounded p-8 bg-[var(--surface-card)] transition-colors duration-300 hover:border-[var(--primary)]">
+			<h2 class="font-['Geist'] text-2xl font-semibold text-[var(--data-highlight)] border-b border-[var(--blueprint-line)] pb-4 mb-6">
+			  Unified Architectural Force
+			</h2>
+			<div class="space-y-6 font-['Geist'] text-lg text-[var(--on-surface)] leading-relaxed">
+			  <p>Based in Toronto, Ontario, Maple-Tyne Technologies Inc. is a Tech Venture Studio and Engineering Firm specializing in high-utility orchestration.</p>
+			  <p>We build automated infrastructure spanning energy and financial services.</p>
+			  <p>Our core mission is to act as a unified force for structural, intelligent automation by blending advanced hardware interfaces with everyday digital utilities.</p>
+			  <p>We are dedicated to building systems that provide absolute peace of mind, ensure sovereign data privacy, and operate independently of restrictive, vendor-locked ecosystems.</p>
+			</div>
+		  </div>
+
+		  <!-- Data Sidebar -->
+		  <div class="col-span-12 md:col-span-4 flex flex-col space-y-6">
+			<!-- Metrics Card -->
+			<div class="border border-[var(--outline)] rounded p-6 bg-[var(--surface-container)] hover:bg-[var(--surface-container-high)] transition-colors duration-300">
+			  <h3 class="font-['JetBrains_Mono'] text-xs text-[var(--on-surface-variant)] uppercase tracking-widest border-b border-[var(--outline-variant)] pb-2 mb-4">Location_Data</h3>
+			  <div class="flex justify-between items-end mb-4">
+				<span class="font-['Geist'] text-[var(--data-highlight)] text-xl font-medium">HQ</span>
+				<span class="font-['JetBrains_Mono'] text-[var(--primary)] text-sm">Toronto, ON</span>
+			  </div>
+			</div>
+
+			<!-- Core Principles Card -->
+			<div class="border border-[var(--outline)] rounded p-6 bg-[var(--surface-container)] flex-grow">
+			  <h3 class="font-['JetBrains_Mono'] text-xs text-[var(--on-surface-variant)] uppercase tracking-widest border-b border-[var(--outline-variant)] pb-2 mb-4">Core_Directives</h3>
+			  <ul class="space-y-4">
+				<li class="flex items-start space-x-3">
+				  <span class="text-[var(--primary)] text-lg leading-none mt-1">▹</span>
+				  <div>
+					<h4 class="font-['Geist'] text-base text-[var(--data-highlight)] font-medium">Structural Automation</h4>
+					<p class="font-['Geist'] text-sm text-[var(--on-surface-variant)]">Eliminating manual intervention in utility environments.</p>
+				  </div>
+				</li>
+				<li class="flex items-start space-x-3">
+				  <span class="text-[var(--primary)] text-lg leading-none mt-1">▹</span>
+				  <div>
+					<h4 class="font-['Geist'] text-base text-[var(--data-highlight)] font-medium">Sovereign Privacy</h4>
+					<p class="font-['Geist'] text-sm text-[var(--on-surface-variant)]">Local-first architectures with zero cloud dependency.</p>
+				  </div>
+				</li>
+				<li class="flex items-start space-x-3">
+				  <span class="text-[var(--primary)] text-lg leading-none mt-1">▹</span>
+				  <div>
+					<h4 class="font-['Geist'] text-base text-[var(--data-highlight)] font-medium">Hardware Neutrality</h4>
+					<p class="font-['Geist'] text-sm text-[var(--on-surface-variant)]">Agnostic communication spanning multi-vendor devices.</p>
+				  </div>
+				</li>
+			  </ul>
+			</div>
+		  </div>
+
 		</div>
 	</main>
 </Layout>
-
-<style>
-	.page-container {
-		width: 100%;
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 4rem 2rem;
-	}
-
-  .page-header {
-    margin-bottom: 3rem;
-  }
-
-  .page-header h1 {
-    font-size: 3.5rem;
-    line-height: 1.1;
-  }
-
-  .content-section p {
-    font-size: 1.125rem;
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
-    line-height: 1.8;
-  }
-</style>
