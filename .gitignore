@@ -8,7 +8,8 @@ astro/.astro/
 .agents/
 .claude/
 _bmad/
-_bmad-output/
+_bmad-output/stitch-extracted/
+_bmad-output/test-artifacts/
 
 # OS files
 .DS_Store

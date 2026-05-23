@@ -1,0 +1,58 @@
+# generated: 2026-05-22T20:12:00-04:00
+# last_updated: 2026-05-22T20:12:00-04:00
+# project: mtt
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: {project-root}/_bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-05-22T20:12:00-04:00
+last_updated: 2026-05-22T20:12:00-04:00
+project: mtt
+project_key: NOKEY
+tracking_system: file-system
+story_location: {project-root}/_bmad-output/implementation-artifacts
+
+development_status:
+  epic-1: in-progress
+  1-1-design-token-css-variables-layout-frame-favicon: ready-for-dev
+  1-2-sticky-glassmorphic-header-system-status-telemetry: ready-for-dev
+  1-3-responsive-bento-grid-layout-framework: ready-for-dev
+  1-4-dynamic-footnotes-footer-links: ready-for-dev
+  epic-1-retrospective: optional
+  epic-2: backlog
+  2-1-v2h-arbitrage-telemetry-visualizer-layout: ready-for-dev
+  2-2-css-animated-energy-flow-svg-diagram: ready-for-dev
+  2-3-telemetry-failure-resilience-graceful-degradation: ready-for-dev
+  epic-2-retrospective: optional
+  epic-3: backlog
+  3-1-interactive-solar-roi-calculator-widget: ready-for-dev
+  epic-3-retrospective: optional

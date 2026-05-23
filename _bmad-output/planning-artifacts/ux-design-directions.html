@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTT Design Directions Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=JetBrains+Mono:wght@400..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-dark: #0A0A0A;
+            --color-card-dark: #141414;
+            --color-border-dark: #262626;
+            --color-accent-green: #66BB6A;
+            --color-accent-blue: #29B6F6;
+            --color-accent-amber: #FFB74D;
+            --color-text-dark: #F5F5F5;
+            --color-text-muted: #8E8E93;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #050505;
+            color: var(--color-text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Showcase Header Controls */
+        .showcase-controls {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid #333;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .showcase-title h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .showcase-title span {
+            color: var(--color-accent-green);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            background: rgba(102, 187, 106, 0.1);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(102, 187, 106, 0.2);
+        }
+
+        .direction-selectors {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .direction-btn {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: var(--color-text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .direction-btn:hover {
+            border-color: var(--color-accent-blue);
+            color: #FFF;
+        }
+
+        .direction-btn.active {
+            background-color: var(--color-accent-blue);
+            border-color: var(--color-accent-blue);
+            color: #000;
+        }
+
+        .comparison-layout {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Meta details */
+        .direction-meta {
+            background-color: #111;
+            border: 1px solid #222;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .direction-meta h2 {
+            font-size: 1.2rem;
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .direction-meta p {
+            color: #AAA;
+            font-size: 0.95rem;
+        }
+
+        .token-badges {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .token-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background: #222;
+            color: #CCC;
+        }
+
+        /* Mockup Sandbox Container */
+        .mockup-sandbox {
+            background-color: #000;
+            border: 1px solid #222;
+            border-radius: 12px;
+            min-height: 600px;
+            position: relative;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* ==================== MOCKUP DIRECTIONS ==================== */
+        .direction-pane {
+            display: none;
+            width: 100%;
+            height: 100%;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .direction-pane.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Direction 1: Developer Console Vibe --- */
+        .dir-console {
+            background-color: #050505;
+            font-family: 'JetBrains Mono', monospace;
+            color: #00ff66;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .dir-console .header-console {
+            border-bottom: 1px dashed #00ff66;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dir-console .grid-console {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .dir-console .card-console {
+            border: 1px solid #00ff66;
+            background-color: rgba(0, 255, 102, 0.03);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .dir-console .card-console::before {
+            content: "[SYS_CELL]";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background-color: #050505;
+            padding: 0 5px;
+            font-size: 0.7rem;
+        }
+
+        .dir-console .btn-console {
+            background-color: transparent;
+            border: 1px solid #00ff66;
+            color: #00ff66;
+            padding: 0.5rem 1rem;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+
+        .dir-console .btn-console:hover {
+            background-color: #00ff66;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0,255,102,0.5);
+        }
+
+        /* --- Direction 2: Premium Consumer Tech (Vercel Style) --- */
+        .dir-vercel {
+            background-color: #0A0A0A;
+            font-family: 'Outfit', sans-serif;
+            color: #FFF;
+            padding: 3rem;
+        }
+
+        .dir-vercel .hero-text {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+        }
+
+        .dir-vercel h2.gradient-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFF 30%, var(--color-accent-blue) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .dir-vercel .grid-vercel {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .dir-vercel .card-vercel {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .dir-vercel .card-vercel:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+
+        /* --- Direction 3: Hardware Telemetry Blueprint --- */
+        .dir-blueprint {
+            background-color: #09131a;
+            font-family: 'Outfit', sans-serif;
+            color: #a3c1ad;
+            background-image: radial-gradient(rgba(41, 182, 246, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+            padding: 2rem;
+        }
+
+        .dir-blueprint .blueprint-header {
+            border: 1px solid #1a3344;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dir-blueprint .flow-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .dir-blueprint .node {
+            border: 2px solid var(--color-accent-blue);
+            background: #09131a;
+            padding: 1.5rem;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(41, 182, 246, 0.2);
+        }
+
+        .dir-blueprint .pulse-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-accent-blue), transparent);
+            flex: 1;
+            margin: 0 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dir-blueprint .pulse-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100px;
+            width: 100px;
+            height: 100%;
+            background: white;
+            animation: pulse-flow 2s infinite linear;
+        }
+
+        @keyframes pulse-flow {
+            0% { left: -100px; }
+            100% { left: 100%; }
+        }
+
+        /* --- Direction 4: Editorial Minimalist --- */
+        .dir-minimal {
+            background-color: #0b0b0b;
+            font-family: 'Fraunces', serif;
+            color: #d1d1d6;
+            padding: 4rem;
+        }
+
+        .dir-minimal .serif-heading {
+            font-size: 3rem;
+            font-weight: 400;
+            font-style: italic;
+            color: #FFF;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .dir-minimal .content-split {
+            display: flex;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .dir-minimal .col-text {
+            flex: 1;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #8E8E93;
+        }
+
+        .dir-minimal .col-large {
+            flex: 1.5;
+            border-left: 1px solid #222;
+            padding-left: 2rem;
+        }
+
+        /* --- Direction 5: Dynamic Dashboard (Enphase Vibe) --- */
+        .dir-dashboard {
+            background-color: #0C0F12;
+            font-family: 'Outfit', sans-serif;
+            padding: 2rem;
+        }
+
+        .dir-dashboard .dash-widgets {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .dir-dashboard .widget {
+            background-color: #171E24;
+            border: 1px solid #24313B;
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .dir-dashboard .widget-title {
+            font-size: 0.8rem;
+            color: #6C7D8B;
+            text-transform: uppercase;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .dir-dashboard .widget-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #FFF;
+        }
+
+        .dir-dashboard .widget-chart {
+            height: 150px;
+            background: linear-gradient(180deg, rgba(102, 187, 106, 0.1), transparent);
+            border: 1px solid rgba(102, 187, 106, 0.2);
+            border-radius: 6px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: flex-end;
+            padding: 0.5rem;
+            gap: 4px;
+        }
+
+        .dir-dashboard .bar {
+            width: 100%;
+            background-color: var(--color-accent-green);
+            border-radius: 2px;
+        }
+
+        /* --- Direction 6: Bento Grid Hub (Final Spec Base) --- */
+        .dir-bentohub {
+            background-color: var(--color-bg-dark);
+            font-family: 'Outfit', sans-serif;
+            color: var(--color-text-dark);
+            padding: 3rem;
+        }
+
+        .dir-bentohub .grid-bento {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .dir-bentohub .card-bento {
+            background-color: var(--color-card-dark);
+            border: 1px solid var(--color-border-dark);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+
+        .dir-bentohub .card-bento::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--x, 0) var(--y, 0), rgba(102, 187, 106, 0.08), transparent 40%);
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .dir-bentohub .card-bento:hover::before {
+            opacity: 1;
+        }
+
+        .dir-bentohub .card-bento:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-accent-green);
+            box-shadow: 0 10px 30px rgba(102, 187, 106, 0.08);
+        }
+
+        .dir-bentohub .col-span-2 {
+            grid-column: span 2;
+        }
+
+        .dir-bentohub .bento-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            background: rgba(102, 187, 106, 0.1);
+            color: var(--color-accent-green);
+            padding: 0.25rem 0.6rem;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .dir-bentohub h3 {
+            font-size: 1.35rem;
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .dir-bentohub p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="showcase-controls">
+        <div class="showcase-title">
+            <h1>MTT Design Showcase <span>ACTIVE</span></h1>
+        </div>
+        <div class="direction-selectors">
+            <button class="direction-btn active" onclick="switchDirection(1)">1. Dev Console</button>
+            <button class="direction-btn" onclick="switchDirection(2)">2. Premium Vercel</button>
+            <button class="direction-btn" onclick="switchDirection(3)">3. Hardware Blueprint</button>
+            <button class="direction-btn" onclick="switchDirection(4)">4. Editorial Serif</button>
+            <button class="direction-btn" onclick="switchDirection(5)">5. Data Dashboard</button>
+            <button class="direction-btn" onclick="switchDirection(6)">6. Bento Grid Hub</button>
+        </div>
+    </div>
+
+    <div class="comparison-layout">
+        <div class="direction-meta">
+            <h2 id="meta-title">Developer Console Vibe</h2>
+            <p id="meta-desc">High-density technical layout modeled directly on developer terminal consoles, utilizing glowing neon indicators, monospaced typography, and bordered cell tags.</p>
+            <div class="token-badges" id="meta-tokens">
+                <span class="token-badge">Font: JetBrains Mono</span>
+                <span class="token-badge">Background: #050505</span>
+                <span class="token-badge">Accent: #00ff66</span>
+                <span class="token-badge">Layout: Raw terminal rows</span>
+            </div>
+        </div>
+
+        <div class="mockup-sandbox" id="sandbox">
+            
+            <!-- Direction 1 -->
+            <div class="direction-pane active" id="dir-1">
+                <div class="dir-console">
+                    <div class="header-console">
+                        <div>MAPLE_TYNE_ORCHESTRATION // SYSTEM_READY</div>
+                        <div>LOAD_AVG: 0.24 // API_STABLE</div>
+                    </div>
+                    <div class="grid-console">
+                        <div class="card-console">
+                            <h4>SOLAR_ROI_CALC</h4>
+                            <p style="margin-top: 1rem; color: #888;">Active local inference computing battery protection index.</p>
+                            <div style="font-size: 1.5rem; margin: 1rem 0; color: #FFF;">98.4% CONFIDENCE</div>
+                            <button class="btn-console">RUN_DIAGNOSTICS</button>
+                        </div>
+                        <div class="card-console">
+                            <h4>V2H_ARBITRAGE</h4>
+                            <p style="margin-top: 1rem; color: #888;">Monitoring tariff cycles for electric battery discharge.</p>
+                            <div style="font-size: 1.5rem; margin: 1rem 0; color: #FFF;">+$12.42 SPREAD</div>
+                            <button class="btn-console">FETCH_LOGS</button>
+                        </div>
+                        <div class="card-console">
+                            <h4>INVOICE_GEN</h4>
+                            <p style="margin-top: 1rem; color: #888;">B2B automation micro-service serving ledger exports.</p>
+                            <div style="font-size: 1.5rem; margin: 1rem 0; color: #FFF;">0.00ms DELAY</div>
+                            <button class="btn-console">TEST_API</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 2 -->
+            <div class="direction-pane" id="dir-2">
+                <div class="dir-vercel">
+                    <div class="hero-text">
+                        <h2 class="gradient-title">Active Engineering For Premium Ventures.</h2>
+                        <p style="color: var(--color-text-muted); font-size: 1.1rem;">Elegant automated solutions powering infrastructure across energy and financial layers with absolute data privacy.</p>
+                    </div>
+                    <div class="grid-vercel">
+                        <div class="card-vercel">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">AI-Native Energy</h3>
+                            <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">Optimizing vehicle-to-home spreads and stationary battery cycles with zero manual overhead.</p>
+                            <a href="#" style="color: var(--color-accent-blue); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 4px;">Explore Spec &rarr;</a>
+                        </div>
+                        <div class="card-vercel">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Venture Studio</h3>
+                            <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">Evaluating capabilities through functional calculators and automated portfolio tools.</p>
+                            <a href="#" style="color: var(--color-accent-blue); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 4px;">Browse ventures &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 3 -->
+            <div class="direction-pane" id="dir-3">
+                <div class="dir-blueprint">
+                    <div class="blueprint-header">
+                        <div>MAPLE TYNE V2H CORE BLUEPRINT</div>
+                        <div style="color: var(--color-accent-blue); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">REF: ENER_SYS_01</div>
+                    </div>
+                    <p style="text-align: center; color: #8ea2ad;">ACTIVE POWER ROUTING BLUEPRINT</p>
+                    <div class="flow-container">
+                        <div class="node">SOLAR PANEL<br><span style="color: var(--color-accent-green)">+2.4 kW</span></div>
+                        <div class="pulse-line"></div>
+                        <div class="node" style="border-color: var(--color-accent-amber);">V2H BATTERY<br><span style="color: var(--color-accent-amber)">84%</span></div>
+                        <div class="pulse-line"></div>
+                        <div class="node">HOME LOAD<br><span style="color: #FFF">0.8 kW</span></div>
+                    </div>
+                    <div style="border: 1px solid #1a3344; padding: 1rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+                        [STATE: ROUTING ACTIVE] -> SOLAR ENERGY SATURATING BATTERY -> SPREAD OPTIMAL
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 4 -->
+            <div class="direction-pane" id="dir-4">
+                <div class="dir-minimal">
+                    <h2 class="serif-heading">Rigorous engineering meets elegant automated orchestration.</h2>
+                    <div class="content-split">
+                        <div class="col-text">
+                            Maple Tyne Technologies was formed as a venture builder focused on local-first integrity. We specialize in V2H arbitrage calculations, battery protections, and financial ledgers that keep data isolated at the edge.
+                        </div>
+                        <div class="col-text col-large">
+                            <h4 style="font-family: 'Fraunces', serif; color: #FFF; font-size: 1.25rem; font-style: italic; margin-bottom: 1rem;">Primary Engagements</h4>
+                            <p style="margin-bottom: 0.75rem;"><strong style="color: #FFF;">EcoAudit Canada</strong> — High utility solar ROI calculators.</p>
+                            <p><strong style="color: #FFF;">Arbitrage V2H</strong> — Hardware safety controls and tariff spread schedulers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 5 -->
+            <div class="direction-pane" id="dir-5">
+                <div class="dir-dashboard">
+                    <div class="dash-widgets">
+                        <div class="widget">
+                            <div class="widget-title">Active Solar Return</div>
+                            <div class="widget-value">$1,248.40</div>
+                            <div style="color: var(--color-accent-green); font-size: 0.8rem; margin-top: 0.25rem;">+14.2% YoY</div>
+                        </div>
+                        <div class="widget">
+                            <div class="widget-title">Battery Cycle Degradation</div>
+                            <div class="widget-value">0.02%</div>
+                            <div style="color: var(--color-accent-blue); font-size: 0.8rem; margin-top: 0.25rem;">Safeguard Active</div>
+                        </div>
+                        <div class="widget">
+                            <div class="widget-title">API Connection Latency</div>
+                            <div class="widget-value">12ms</div>
+                            <div style="color: var(--color-accent-green); font-size: 0.8rem; margin-top: 0.25rem;">Excellent</div>
+                        </div>
+                        <div class="widget">
+                            <div class="widget-title">Webhook Status</div>
+                            <div class="widget-value" style="color: var(--color-accent-green);">CONNECTED</div>
+                            <div style="color: #888; font-size: 0.8rem; margin-top: 0.25rem;">https://uml.maple...</div>
+                        </div>
+                    </div>
+                    <div style="background-color: #171E24; border: 1px solid #24313B; border-radius: 8px; padding: 1.5rem;">
+                        <h4 style="color: #FFF; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 1rem;">ACTIVE SAVINGS TELEMETRY</h4>
+                        <div class="widget-chart">
+                            <div class="bar" style="height: 40%;"></div>
+                            <div class="bar" style="height: 60%;"></div>
+                            <div class="bar" style="height: 80%;"></div>
+                            <div class="bar" style="height: 75%;"></div>
+                            <div class="bar" style="height: 95%;"></div>
+                            <div class="bar" style="height: 85%;"></div>
+                            <div class="bar" style="height: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direction 6 -->
+            <div class="direction-pane" id="dir-6">
+                <div class="dir-bentohub">
+                    <div class="grid-bento">
+                        <div class="card-bento col-span-2">
+                            <span class="bento-tag">AI-Native Energy Management</span>
+                            <h3>Vehicle-to-Home (V2H) Spread Arbitrage</h3>
+                            <p>Seamlessly charging electric vehicles during tariff troughs and supplying household load during peaks. Absolute hardware safety parameters protect battery lifespan.</p>
+                        </div>
+                        <div class="card-bento">
+                            <span class="bento-tag">EcoAudit Canada</span>
+                            <h3>Solar ROI Tool</h3>
+                            <p>Verify potential returns on home solar and stationary batteries with real utility estimates.</p>
+                        </div>
+                        <div class="card-bento">
+                            <span class="bento-tag">Dynamic API Connection</span>
+                            <h3>Diagnostics Console</h3>
+                            <p>Auto-detects active APIs and exposes fallback webhook input panels directly in the dashboard tab.</p>
+                        </div>
+                        <div class="card-bento col-span-2">
+                            <span class="bento-tag" style="background: rgba(41, 182, 246, 0.1); color: var(--color-accent-blue);">B2B Ledger Operations</span>
+                            <h3>Local-First Invoice Automation</h3>
+                            <p>Generating verified financial statements with strict client privacy barriers, ensuring offline security.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const details = {
+            1: {
+                title: "Developer Console Vibe",
+                desc: "High-density technical layout modeled directly on developer terminal consoles, utilizing glowing neon indicators, monospaced typography, and bordered cell tags.",
+                tokens: ["Font: JetBrains Mono", "Background: #050505", "Accent: #00ff66", "Layout: Raw terminal rows"]
+            },
+            2: {
+                title: "Premium Consumer Tech (Vercel Style)",
+                desc: "Modern corporate aesthetic featuring deep dark gradients, wide container margins, elegant sans-serif, high-fidelity glowing hover cards, and gradient titles.",
+                tokens: ["Font: Outfit", "Background: #0A0A0A", "Accent: #29B6F6", "Layout: Wide column blocks"]
+            },
+            3: {
+                title: "Hardware Telemetry Blueprint",
+                desc: "Grid-locked schematic design showing operational nodes connected by active flow indicators. Simulates structural hardware mapping.",
+                tokens: ["Font: Outfit / Mono", "Background: #09131a", "Accent: #a3c1ad", "Layout: Node flow schematic"]
+            },
+            4: {
+                title: "Editorial Serif Minimalist",
+                desc: "Sophisticated editorial format centered on high typography focus, large line heights, minimal border separations, and deep italic headings.",
+                tokens: ["Font: Fraunces / Outfit", "Background: #0b0b0b", "Accent: #FFF", "Layout: Split column layout"]
+            },
+            5: {
+                title: "Dynamic Dashboard Widget Layout",
+                desc: "Componentized dashboard focused on metrics and interactive telemetry chart indicators. Simulates live operational readings.",
+                tokens: ["Font: Outfit", "Background: #0C0F12", "Accent: #66BB6A", "Layout: Grid widgets"]
+            },
+            6: {
+                title: "Bento Grid Hub (Specification Base)",
+                desc: "Optimized bento grid card hub representing our core UX design decisions. Provides tactile tilted interactions and harmonious HSL gradients.",
+                tokens: ["Font: Outfit / Fraunces / Mono", "Background: #0A0A0A", "Accent: #66BB6A", "Layout: 12-column Bento"]
+            }
+        };
+
+        function switchDirection(num) {
+            // Update active button
+            const buttons = document.querySelectorAll('.direction-btn');
+            buttons.forEach((btn, index) => {
+                if (index === num - 1) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update meta content
+            const detail = details[num];
+            document.getElementById('meta-title').innerText = detail.title;
+            document.getElementById('meta-desc').innerText = detail.desc;
+            
+            const badgeContainer = document.getElementById('meta-tokens');
+            badgeContainer.innerHTML = '';
+            detail.tokens.forEach(tok => {
+                const span = document.createElement('span');
+                span.className = 'token-badge';
+                span.innerText = tok;
+                badgeContainer.appendChild(span);
+            });
+
+            // Update active pane
+            const panes = document.querySelectorAll('.direction-pane');
+            panes.forEach((pane, index) => {
+                if (index === num - 1) {
+                    pane.classList.add('active');
+                } else {
+                    pane.classList.remove('active');
+                }
+            });
+        }
+
+        // Bento grid cursor tracker (Direction 6 effect)
+        const bentoGrid = document.querySelector('.dir-bentohub');
+        if (bentoGrid) {
+            bentoGrid.addEventListener('mousemove', e => {
+                const cards = document.querySelectorAll('.card-bento');
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect(),
+                          x = e.clientX - rect.left,
+                          y = e.clientY - rect.top;
+                    card.style.setProperty('--x', `${x}px`);
+                    card.style.setProperty('--y', `${y}px`);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
